@@ -5,7 +5,7 @@ import pytest
 from pytest import approx
 
 
-x = numpy.random.normal(size=100)
+x = numpy.random.normal(size=20)
 
 
 @pytest.mark.mandatory
@@ -24,8 +24,14 @@ def test_my_var():
     assert ex1.my_var(x) == approx(numpy.var(x), rel=1e-3)
 
 
-@pytest.mark.points(10)
-def test_my_median():
+@pytest.mark.points(5)
+def test_my_median_odd():
+    y = numpy.random.normal(size=5)
+    assert ex1.my_median(y) == approx(numpy.median(y))
+
+
+@pytest.mark.points(5)
+def test_my_median_even():
     assert ex1.my_median(x) == approx(numpy.median(x))
 
 
